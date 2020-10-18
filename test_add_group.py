@@ -10,63 +10,23 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from group import Group
+from application import  Application
 
-class Test_add_group():
-  def setup_method(self, method):
-    self.driver = webdriver.Chrome()
-    self.vars = {}
-  
-  def teardown_method(self, method):
-    self.driver.quit()
-  
-  def test_add_group(self):
-    self.login(user="admin", password="secret")
-    self.create_groups(Group(groupname="sdfsdываываывf", groupheader="sdfsdf",  groupfooter="sdf"))
-    self.view_groups()
-    self.logout()
+@pytest.fixture
+def app(request):
+  fixture = Application()
+  request.addfinalizer(fixture.destroy)
+  return fixture
 
-  def test_add_empty_group(self):
-    self.login(user="admin", password="secret")
+def test_add_group(app):
+  app.login(user="admin", password="secret")
+  app.create_groups(Group(groupname="sdfsdываываывf", groupheader="sdfsdf",  groupfooter="sdf"))
+  app.view_groups()
+  app.logout()
 
-    self.create_groups(Group(groupname="", groupheader="",  groupfooter=""))
-    self.view_groups()
-    self.logout()
+def test_add_empty_group(app):
+  app.login(user="admin", password="secret")
+  app.create_groups(Group(groupname="", groupheader="",  groupfooter=""))
+  app.view_groups()
+  app.logout()
 
-  def logout(self):
-    # logout
-    self.driver.find_element(By.LINK_TEXT, "Logout").click()
-
-  def view_groups(self):
-    # view group
-    self.driver.find_element(By.LINK_TEXT, "groups").click()
-
-  def create_groups(self, group):
-    # init group creation
-    self.open_groups_page()
-    self.driver.find_element(By.NAME, "new").click()
-    # fill group form
-    self.driver.find_element(By.NAME, "group_name").click()
-    self.driver.find_element(By.NAME, "group_name").send_keys(group.groupname)
-    self.driver.find_element(By.NAME, "group_header").click()
-    self.driver.find_element(By.NAME, "group_header").send_keys(group.groupheader)
-    self.driver.find_element(By.NAME, "group_footer").click()
-    self.driver.find_element(By.NAME, "group_footer").send_keys(group.groupfooter)
-    self.driver.find_element(By.NAME, "submit").click()
-    self.open_groups_page()
-
-
-  def open_groups_page(self):
-    # open groups page
-    self.driver.find_element(By.LINK_TEXT, "groups").click()
-
-  def login(self, user, password):
-    # login
-    self.open_home_page()
-    self.driver.find_element(By.NAME, "user").send_keys(user)
-    self.driver.find_element(By.NAME, "pass").send_keys(password)
-    self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(7)").click()
-
-  def open_home_page(self):
-    # open home page
-    self.driver.get("http://addressbook/")
-  
