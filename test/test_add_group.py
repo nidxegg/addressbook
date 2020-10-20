@@ -9,8 +9,8 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from group import Group
-from application import  Application
+from model.group import Group
+from fixture.application import  Application
 
 @pytest.fixture
 def app(request):
