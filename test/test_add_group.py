@@ -19,14 +19,14 @@ def app(request):
   return fixture
 
 def test_add_group(app):
-  app.login(user="admin", password="secret")
+  app.session.login(user="admin", password="secret")
   app.create_groups(Group(groupname="sdfsdываываывf", groupheader="sdfsdf",  groupfooter="sdf"))
   app.view_groups()
-  app.logout()
+  app.session.logout()
 
 def test_add_empty_group(app):
-  app.login(user="admin", password="secret")
+  app.session.login(user="admin", password="secret")
   app.create_groups(Group(groupname="", groupheader="",  groupfooter=""))
   app.view_groups()
-  app.logout()
+  app.session.logout()
 
