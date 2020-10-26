@@ -20,13 +20,13 @@ def app(request):
 
 def test_add_group(app):
   app.session.login(user="admin", password="secret")
-  app.create_groups(Group(groupname="sdfsdываываывf", groupheader="sdfsdf",  groupfooter="sdf"))
-  app.view_groups()
+  app.group.create_groups(Group(groupname="sdfsdываываывf", groupheader="sdfsdf",  groupfooter="sdf"))
+  app.group.view_groups()
   app.session.logout()
 
 def test_add_empty_group(app):
   app.session.login(user="admin", password="secret")
-  app.create_groups(Group(groupname="", groupheader="",  groupfooter=""))
-  app.view_groups()
+  app.group.create_groups(Group(groupname="", groupheader="",  groupfooter=""))
+  app.group.view_groups()
   app.session.logout()
 
