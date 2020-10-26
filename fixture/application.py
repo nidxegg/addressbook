@@ -12,12 +12,9 @@ class Application:
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
 
-
-
     def open_home_page(self):
         # open home page
         self.driver.get("http://addressbook/")
-
 
     def destroy(self):
         self.driver.quit()
