@@ -1,1 +1,12 @@
 [1026/110740.955:ERROR:process_info.cc(359)] UncheckedAllocate
+[1026/111353.726:ERROR:process_info.cc(359)] UncheckedAllocate
+[1026/111722.758:ERROR:process_reader_win.cc(123)] NtOpenThread: {Отказано в доступе} Процесс запросил доступ к объекту, но права на доступ не предоставлены. (0xc0000022)
+[1026/111722.758:ERROR:exception_snapshot_win.cc(99)] thread ID 274204 not found in process
+[1026/111722.779:ERROR:process_reader_win.cc(123)] NtOpenThread: {Отказано в доступе} Процесс запросил доступ к объекту, но права на доступ не предоставлены. (0xc0000022)
+[1026/111722.779:ERROR:exception_snapshot_win.cc(99)] thread ID 342220 not found in process
+[1026/111744.813:ERROR:process_info.cc(359)] UncheckedAllocate
+[1026/111744.934:ERROR:process_info.cc(359)] UncheckedAllocate
+[1026/111818.388:ERROR:process_reader_win.cc(123)] NtOpenThread: {Отказано в доступе} Процесс запросил доступ к объекту, но права на доступ не предоставлены. (0xc0000022)
+[1026/111818.389:ERROR:exception_snapshot_win.cc(99)] thread ID 342264 not found in process
+[1026/111818.414:ERROR:process_reader_win.cc(123)] NtOpenThread: {Отказано в доступе} Процесс запросил доступ к объекту, но права на доступ не предоставлены. (0xc0000022)
+[1026/111818.414:ERROR:exception_snapshot_win.cc(99)] thread ID 5072 not found in process
