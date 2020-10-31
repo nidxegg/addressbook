@@ -16,21 +16,46 @@ class GroupHelper:
         driver = self.app.driver
         self.open_groups_page()
         driver.find_element(By.NAME, "new").click()
-        # fill group form
-        driver.find_element(By.NAME, "group_name").click()
-        driver.find_element(By.NAME, "group_name").send_keys(group.groupname)
-        driver.find_element(By.NAME, "group_header").click()
-        driver.find_element(By.NAME, "group_header").send_keys(group.groupheader)
-        driver.find_element(By.NAME, "group_footer").click()
-        driver.find_element(By.NAME, "group_footer").send_keys(group.groupfooter)
+        self.fill_group_form(group)
         driver.find_element(By.NAME, "submit").click()
         self.open_groups_page()
+
+    def fill_group_form(self, group):
+        self.change_field_value("group_name", group.groupname)
+        self.change_field_value("group_header", group.groupheader)
+        self.change_field_value("group_footer", group.groupfooter)
+
+    def change_field_value(self, fieldname, text):
+        driver = self.app.driver
+        if text is not None:
+            driver.find_element(By.NAME, fieldname).click()
+            driver.find_element(By.NAME, fieldname).clear()
+            driver.find_element(By.NAME, fieldname).send_keys(text)
 
     def del_groups(self):
         driver = self.app.driver
         self.open_groups_page()
-        driver.find_element(By.NAME, "selected[]").click()
+        self.select_first_group()
         driver.find_element(By.NAME, "delete").click()
         self.open_groups_page()
+
+    def select_first_group(self):
+        driver = self.app.driver
+        driver.find_element(By.NAME, "selected[]").click()
+
+    def modify_first_group(self, new_group_data):
+        # open groups page
+        driver = self.app.driver
+        self.app.driver.find_element(By.LINK_TEXT, "groups").click()
+        self.open_groups_page()
+        self.select_first_group()
+        #open modify group page
+        driver.find_element(By.NAME, "edit").click()
+        self.fill_group_form(new_group_data)
+
+        driver.find_element(By.NAME, "update").click()
+
+
+
 
 
