@@ -1,11 +1,13 @@
 from selenium.webdriver.common.by import By
+from model.group import Group
 class GroupHelper:
     def __init__(self, app):
         self.app = app
 
     def open_groups_page(self):
         # open groups page
-        self.app.driver.find_element(By.LINK_TEXT, "groups").click()
+        if not (self.app.driver.current_url.endswith("/group.php") and len(self.app.driver.find_elements(By.NAME, "new")) > 0):
+            self.app.driver.find_element(By.LINK_TEXT, "groups").click()
 
     def view_groups(self):
         # view group
@@ -52,13 +54,23 @@ class GroupHelper:
         #open modify group page
         driver.find_element(By.NAME, "edit").click()
         self.fill_group_form(new_group_data)
-
         driver.find_element(By.NAME, "update").click()
 
     def count(self):
         driver = self.app.driver
         self.open_groups_page()
         return len(driver.find_elements(By.NAME, "selected[]"))
+
+    def get_group_list(self):
+        driver = self.app.driver
+        self.open_groups_page()
+        groups = []
+        for element in driver.find_elements(By.CSS_SELECTOR, "span.group"):
+            text = element.text
+            id = element.find_element(By.NAME, "selected[]").get_attribute("value")
+            groups.append(Group(groupname=text, id=id))
+        return groups
+
 
 
 

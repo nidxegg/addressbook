@@ -15,10 +15,15 @@ from fixture.application import  Application
 
 
 def test_add_group(app):
+  old_groups = app.group.get_group_list()
   app.group.create_groups(Group(groupname="sdfsdываываывf", groupheader="sdfsdf",  groupfooter="sdf"))
-  app.group.view_groups()
+  new_groups = app.group.get_group_list()
+  assert len(old_groups) + 1 == len(new_groups)
 
 def test_add_empty_group(app):
+  old_groups = app.group.get_group_list()
   app.group.create_groups(Group(groupname="", groupheader="",  groupfooter=""))
-  app.group.view_groups()
+  new_groups = app.group.get_group_list()
+  assert len(old_groups) + 1 == len(new_groups)
+
 

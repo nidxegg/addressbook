@@ -1,14 +1,21 @@
 from model.group import Group
 
 def test_modify_first_group_name(app):
+  old_groups = app.group.get_group_list()
   app.group.modify_first_group(Group(groupname="Modify Group name"))
-  app.group.view_groups()
+  new_groups = app.group.get_group_list()
+  assert len(old_groups) == len(new_groups)
+
 
 def test_modify_first_group_header(app):
+  old_groups = app.group.get_group_list()
   app.group.modify_first_group(Group(groupheader="Modify Group header"))
-  app.group.view_groups()
+  new_groups = app.group.get_group_list()
+  assert len(old_groups) == len(new_groups)
 
 def test_modify_first_group_footer(app):
+  old_groups = app.group.get_group_list()
   app.group.modify_first_group(Group(groupfooter="Modify Group footer"))
-  app.group.view_groups()
+  new_groups = app.group.get_group_list()
+  assert len(old_groups) == len(new_groups)
 
